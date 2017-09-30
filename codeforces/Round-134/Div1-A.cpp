@@ -4,6 +4,7 @@
 #include<cstdio>
 #include<vector>
 #include<cmath>
+#include<cstring>
 #include<queue>
 #include<list>
 #include<sstream>
@@ -28,13 +29,33 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int const MAXN=500010;
+int const MAXN=110;
+int mark[MAXN];
+int x[MAXN],y[MAXN];
+int n;
+void dfs(int i){
+    mark[i]=1;
+    REP(j,n){
+        if(!mark[j]&&(x[i]==x[j]||y[i]==y[j]))dfs(j);
+    }
+}
 int main(){
     syn;
-    string s;
-    cin >> s;
-    cout <<s;
-
+    // #ifndef ONLINE_JUDGE
+    // // for getting input from input.txt
+    // // freopen("input.txt", "r", stdin);
+    // // // for writing output to output.txt
+    // // freopen("output.txt", "w", stdout);
+    // #endif
+    cin >>n;
+    REP(i,n)cin>>x[i]>>y[i];
+    mem(mark,0);
+    
+    int cnt=0;
+    REP(i,n){
+        if(!mark[i]){
+            dfs(i);cnt++;
+        }
+    }
+    cout <<(cnt-1);
 }
-
-
