@@ -45,12 +45,10 @@ int main(){
 
 	while(n--){
 		cin >> a2 >>b2;
-		sumw1= b2 +max((sumw+abs(a2-a1)), (sumh+abs(a2-b1)));
-		sumh1= a2+max((sumw+abs(b2-a1)), (sumh+abs(b2-b1)));
+		sumw= b2 +max((sumw+abs(a2-a1)), (sumh+abs(a2-b1)));
+		sumh= a2+max((sumw+abs(b2-a1)), (sumh+abs(b2-b1)));
 		a1=a2;
 		b1=b2;
-        sumw=sumw1;
-        sumh=sumh1;
 
 	}
 
