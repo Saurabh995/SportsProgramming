@@ -29,34 +29,20 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
+int const MAXN=1010;
+int a[MAXN];
 int main(){
     syn;
     int n;
-    int i,j,f;
     cin >> n;
-    vector <int>a(100);
-    for(i=0;i<n;i++){
-        a[i]=1;
-    }
-    f=1;
-    int c,sum;
-    for(j=n;j>=1;j--){
-        c=0;
-        for(i=0;i<f;i++){
-            sum=c+a[i]*j;
-            a[i]=sum%10;
-            c=sum/10;
+    REP(i,n)cin >> a[i];
+    sort(a, a+n);
+    int m=NINF;
+    REP(i,n){
+        if(a[i]!=m){
+            cout << (n-i)<<'\n';
+            m=a[i];
         }
-        while(c!=0){
-            a[i++]=c%10;
-            f++;
-            c=c/10;
-        }
-        
-        
-        
     }
-    for(i=f-1;i>=0;i--)
-        cout<<a[i];
     return 0;
 }

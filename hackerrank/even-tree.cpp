@@ -1,6 +1,6 @@
+
 // @author- razor123
 #include<iostream>
-#include<climits>
 #include<cstdlib>
 #include<cstdio>
 #include<vector>
@@ -29,34 +29,39 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int main(){
-    syn;
-    int n;
-    int i,j,f;
-    cin >> n;
-    vector <int>a(100);
-    for(i=0;i<n;i++){
-        a[i]=1;
-    }
-    f=1;
-    int c,sum;
-    for(j=n;j>=1;j--){
-        c=0;
-        for(i=0;i<f;i++){
-            sum=c+a[i]*j;
-            a[i]=sum%10;
-            c=sum/10;
+vector<int> al[105];
+bool visit[105];
+int n,m;
+int ans;
+
+int dfs(int node)
+{
+    visit[node]=true;
+    int num_vertex=0;
+    for(int i=0;i<al[node].size();i++)
+    {
+        if(!visit[al[node][i]])
+        {
+            int num_nodes=dfs(al[node][i]);
+            if(num_nodes%2==0)
+                ans++;
+            else
+                num_vertex+=num_nodes;
         }
-        while(c!=0){
-            a[i++]=c%10;
-            f++;
-            c=c/10;
-        }
-        
-        
-        
     }
-    for(i=f-1;i>=0;i--)
-        cout<<a[i];
+    return num_vertex+1;
+}
+
+int main() {
+    int x,y;
+    cin>>n>>m;
+    for(int i=0;i<m;i++)
+    {
+        cin>>x>>y;
+        al[x].push_back(y);
+        al[y].push_back(x);
+    }
+    dfs(1);
+    cout<<ans;
     return 0;
 }
